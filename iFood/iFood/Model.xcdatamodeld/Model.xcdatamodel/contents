@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18D109" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="categoria" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descricao" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="preco" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="pedidosItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pedido" inverseName="itemPedido" inverseEntity="Pedido" syncable="YES"/>
+        <relationship name="restauranteItem" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Restaurante" inverseName="itemRestaurante" inverseEntity="Restaurante" syncable="YES"/>
+    </entity>
+    <entity name="Pedido" representedClassName="Pedido" syncable="YES" codeGenerationType="class">
+        <attribute name="estadoPedido" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="item" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pessoa" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="itemPedido" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="pedidosItem" inverseEntity="Item" syncable="YES"/>
+        <relationship name="pessoaPedido" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pessoa" inverseName="pedidosPessoa" inverseEntity="Pessoa" syncable="YES"/>
+    </entity>
+    <entity name="Pessoa" representedClassName="Pessoa" syncable="YES" codeGenerationType="class">
+        <attribute name="endereco" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="pedidosPessoa" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Pedido" inverseName="pessoaPedido" inverseEntity="Pedido" syncable="YES"/>
+    </entity>
+    <entity name="Restaurante" representedClassName="Restaurante" syncable="YES" codeGenerationType="class">
+        <attribute name="bairro" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itemRestaurante" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="restauranteItem" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Restaurante" positionX="92.578125" positionY="-297.62890625" width="159.625" height="88"/>
+        <element name="Pedido" positionX="-196.44921875" positionY="-126.3203125" width="128" height="133"/>
+        <element name="Pessoa" positionX="19.1484375" positionY="-144.66015625" width="128" height="103"/>
+        <element name="Item" positionX="-210.8671875" positionY="-442.41015625" width="128" height="148"/>
+    </elements>
+</model>
