@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Restaurante {
+class Restaurant {
     var name : String
     var items : Array<Item>
     var deliveredLocations : String
