@@ -10,4 +10,8 @@ import Foundation
 
 struct Ifood {
 
+    var restaurantID: Int
+    var restaurants = [Int: Restaurant]()
+    var restaurantsCluster = [String: Set<Restaurant>]()
+    
 }

@@ -8,16 +8,24 @@
 
 import Foundation
 
+
 enum DeliveredLocation {
     case Partenon, BelaVista, JardimBotanico, Centro, CidadeBaixa, VilaLeopoldina, Azenha, Petropolis, BomFim
 }
 
-class Restaurant {
-    var name : String
-    var items : Array<Item>
+
+class Restaurant: Hashable {
+   
+    var id: Int
+    var name: String
+    var items: Array<Item>
     var deliveredLocations : DeliveredLocation
+    var hashValue: Int {
+        return id.hashValue
+    }
     
-    init(name: String, deliveredLocations: DeliveredLocation){
+    init(id: Int, name: String, deliveredLocations: DeliveredLocation) {
+        self.id = id
         self.name = name
         self.deliveredLocations = deliveredLocations
         self.items = []
@@ -43,5 +51,9 @@ class Restaurant {
             }
         }
         return false
+    }
+    
+    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+        return lhs.id == rhs.id
     }
 }
