@@ -15,9 +15,9 @@ enum DeliveredLocation {
 class Restaurant {
     var name : String
     var items : Array<Item>
-    var deliveredLocations : DeliveredLocation
+    var deliveredLocations : [DeliveredLocation]
     
-    init(name: String, deliveredLocations: DeliveredLocation){
+    init(name: String, deliveredLocations: [DeliveredLocation]){
         self.name = name
         self.deliveredLocations = deliveredLocations
         self.items = []
