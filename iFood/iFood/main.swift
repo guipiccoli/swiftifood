@@ -27,9 +27,5 @@ import Foundation
 //    let songs2 = try? PropertyListDecoder().decode(User.self, from: data)
 //    print(songs2!.name)
 //}
-
-if let data = UserDefaults.standard.value(forKey:"songs") as? Data {
-   let songs2 = try? PropertyListDecoder().decode(User.self, from: data)
-   print(songs2!.name)
 }
 

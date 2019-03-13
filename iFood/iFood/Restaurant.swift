@@ -8,12 +8,16 @@
 
 import Foundation
 
+enum DeliveredLocation {
+    case Partenon, BelaVista, JardimBotanico, Centro, CidadeBaixa, VilaLeopoldina, Azenha, Petropolis, BomFim
+}
+
 class Restaurant {
     var name : String
     var items : Array<Item>
-    var deliveredLocations : String
+    var deliveredLocations : DeliveredLocation
     
-    init(name: String, deliveredLocations: String){
+    init(name: String, deliveredLocations: DeliveredLocation){
         self.name = name
         self.deliveredLocations = deliveredLocations
         self.items = []

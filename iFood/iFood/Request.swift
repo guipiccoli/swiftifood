@@ -8,6 +8,14 @@
 
 import Foundation
 
+enum Transition {
+    case Pay, Remove, Submit, Cancel, Deliver, Delete
+}
+
+enum State {
+    case Paid, Deleted, OnTheWay, Delivered, Canceled, Cart, Submited
+}
+
 struct Request {
     var items: [Item]
     var totalPrice: Double {
@@ -16,32 +24,32 @@ struct Request {
         }
         return _items.reduce(0) { $0 + $1 }
     }
-    var status: String
-    var transition: String
+    var status: State
+    var transition: Transition
     
     mutating func nextState(){
-    
+        
         switch self.status {
-        case "Cart":
-            if self.transition == "Pay" {
-                self.status = "Paid"
+        case .Cart:
+            if self.transition == .Pay {
+                self.status = .Paid
             }
-            else if self.transition == "Remove" {
-                self.status = "Deleted"
+            else if self.transition == .Delete {
+                self.status = .Deleted
             }
-        case "Paid":
-            if self.transition == "Submit" {
-                self.status = "On the way"
+        case .Paid:
+            if self.transition == .Submit {
+                self.status = .OnTheWay
             }
-            else if self.transition == "Cancel" {
-                self.status = "Canceled"
+            else if self.transition == .Cancel {
+                self.status = .Canceled
             }
-        case "Submited":
-            if self.transition == "Deliver" {
-                self.status = "Delivered"
+        case .Submited:
+            if self.transition == .Deliver {
+                self.status = .Delivered
             }
-            else if self.transition == "Cancel" {
-                self.status = "Canceled"
+            else if self.transition == .Cancel {
+                self.status = .Canceled
             }
             
         default:
@@ -50,27 +58,27 @@ struct Request {
     }
     
     mutating func pay() {
-        self.transition = "Pay"
+        self.transition = .Pay
         nextState()
     }
     
     mutating func cancel() {
-        self.transition = "Cancel"
+        self.transition = .Cancel
         nextState()
     }
     
     mutating func submit() {
-        self.transition = "Submit"
+        self.transition = .Submit
         nextState()
     }
     
     mutating func deliver() {
-        self.transition = "Deliver"
+        self.transition = .Deliver
         nextState()
     }
     
     mutating func delete() {
-        self.transition = "Delete"
+        self.transition = .Delete
         nextState()
     }
     

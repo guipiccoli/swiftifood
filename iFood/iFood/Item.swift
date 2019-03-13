@@ -14,4 +14,3 @@ struct Item: Equatable {
     var price : Double
     var type: String
 }
-

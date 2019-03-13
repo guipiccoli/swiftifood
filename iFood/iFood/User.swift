@@ -19,7 +19,4 @@ class User: Codable {
         self.pedidos = pedidos
     }
     
-    func saveUser(){
-        UserDefaults.standard.set(try? PropertyListEncoder().encode(self), forKey: self.name)
-    }
 }
