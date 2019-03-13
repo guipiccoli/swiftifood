@@ -14,17 +14,18 @@ enum DeliveredLocation {
 }
 
 
+
 class Restaurant: Hashable {
    
     var id: Int
     var name: String
     var items: Array<Item>
-    var deliveredLocations : DeliveredLocation
+    var deliveredLocations : [DeliveredLocation]
     var hashValue: Int {
         return id.hashValue
     }
     
-    init(id: Int, name: String, deliveredLocations: DeliveredLocation) {
+    init(id: Int, name: String, deliveredLocations: [DeliveredLocation]) {
         self.id = id
         self.name = name
         self.deliveredLocations = deliveredLocations
