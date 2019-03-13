@@ -17,4 +17,19 @@ import Foundation
 //rest.removeItem(item: itm)
 //
 //print(rest.items)
+//print("Hello, World!")
+//
+//var obj1 = User(name: "Rogerio", pedidos: 4)
+//
+//UserDefaults.standard.set(try? PropertyListEncoder().encode(obj1), forKey:"songs")
+//
+//if let data = UserDefaults.standard.value(forKey:"songs") as? Data {
+//    let songs2 = try? PropertyListDecoder().decode(User.self, from: data)
+//    print(songs2!.name)
+//}
+
+if let data = UserDefaults.standard.value(forKey:"songs") as? Data {
+   let songs2 = try? PropertyListDecoder().decode(User.self, from: data)
+   print(songs2!.name)
+}
 
