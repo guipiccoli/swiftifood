@@ -9,7 +9,7 @@
 import Foundation
 
 enum Transition {
-    case Pay, Remove, Submit, Cancel, Deliver, Delete
+    case Pay, Remove, Submit, Cancel, Deliver, Delete, Started
 }
 
 enum State {
@@ -31,6 +31,7 @@ class Request {
     
     init(){
         self.status = .Cart
+        self.transition = .Started
     }
     
     func nextState(){
@@ -88,24 +89,38 @@ class Request {
         nextState()
     }
     
-    func addItem(item: Item) {
-        let itemReference = item.restaurant.name + item.name
-        if self.items.keys.contains(itemReference) {
-            self.items[itemReference]?.number += 1
+    func addItem(item: Item) -> Bool {
+        if self.status == .Cart {
+            let itemReference = item.restaurant.name + item.name
+            if self.items.keys.contains(itemReference) {
+                self.items[itemReference]?.number += 1
+            }
+            else {
+               self.items[itemReference] = (1, item)
+            }
+            return true
         }
         else {
-           self.items[itemReference] = (1, item)
+            return false
         }
+    }
+    
+    func removeItem(item: Item) {
+        self.items.removeValue(forKey: item.restaurant.name + item.name)
     }
     
     func description() -> String {
         var result: String
         result = "State: \(self.status)\n"
         self.items.forEach { (arg) in
-            
+        
             let (_, tuple) = arg
             result += "\(tuple.number)x \(tuple.item.name)\n"
+            
         }
+        
+        result += "Price R$\(self.totalPrice)"
+        
         return result
     }
     

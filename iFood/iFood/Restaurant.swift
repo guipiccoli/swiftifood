@@ -21,7 +21,7 @@ class Restaurant: Hashable {
    
     var id: Int
     var name: String
-    var items: Array<Item>
+    var items = [String: Item]()
     var deliveredLocations : Set<DeliveredLocation>
     var categories: Set<Category>
     var hashValue: Int {
@@ -33,7 +33,6 @@ class Restaurant: Hashable {
         self.name = name
         self.deliveredLocations = deliveredLocations
         self.categories = categories
-        self.items = []
     }
     
     static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
@@ -41,29 +40,24 @@ class Restaurant: Hashable {
     }
     
     func addItems(item: Item) -> Bool{
-        if items.contains(item){
+        if items.keys.contains(item.name){
             return false
         }
         else {
-            items.append(item)
+            items[item.name] = item
             return true
         }
     }
     
-    func removeItem(item:Item) -> Bool{
-        if items.contains(item){
-            for (i, auxItem) in self.items.enumerated(){
-                if auxItem == item {
-                    items.remove(at: i)
-                    return true
-                }
-            }
+    func removeItem(item:Item) -> Bool {
+        if items.keys.contains(item.name) {
+            items.removeValue(forKey: item.name)
         }
         return false
     }
     
     func listItems() -> [Item] {
-        return self.items
+        return Array(self.items.values)
     }
     
 }

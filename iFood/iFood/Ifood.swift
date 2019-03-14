@@ -37,6 +37,7 @@ struct Ifood {
                 var _setVar = Set<Restaurant>()
                 _setVar.insert(restaurant)
                 self.restaurantsCategoryCluster[category] = _setVar
+                return
             }
         }
         
@@ -47,7 +48,7 @@ struct Ifood {
     }
     
     mutating func createItem(restaurant: Restaurant, name: String, description: String, price: Double, type: String) -> Item? {
-        let item = Item(name: name, description: description, price: price, type: type)
+        let item = Item(name: name, restaurant: restaurant, description: description, price: price, type: type)
         
         if item.name.count == 0 {return nil}
         if item.description.count == 0 {return nil}
@@ -100,9 +101,18 @@ struct Ifood {
     func selectRestaurant(restaurant: Restaurant) -> [Item] {
         return restaurant.listItems()
     }
-//
-//    func moveToCart(user: User, item: Item) -> bool {
-//
-//    }
-//
+    
+    func moveToCart(user: User, item: Item) -> Bool {
+       return user.mainRequest.addItem(item: item)
+    }
+    
+    func listCartItems(user: User) -> String {
+        return user.mainRequest.description()
+    }
+    
+    func finishOrder(user: User) -> String {
+        user.mainRequest.pay()
+        return user.mainRequest.description()
+    }
+
 }

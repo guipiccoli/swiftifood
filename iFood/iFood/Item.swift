@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Item: Equatable {
+struct Item  {
     var name: String
     var restaurant: Restaurant
     var description: String
