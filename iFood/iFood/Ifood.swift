@@ -107,17 +107,35 @@ struct Ifood {
         return restaurant.listItems()
     }
     
-    func moveToCart(user: User, item: Item) -> Bool {
-       return user.mainRequest.addItem(item: item)
-    }
-    
     func listCartItems(user: User) -> String {
         return user.mainRequest.description()
     }
     
+    func moveToCart(user: User, item: Item) -> Bool {
+       return user.mainRequest.addItem(item: item)
+    }
+    
     func finishOrder(user: User) -> String {
         user.mainRequest.pay()
+        var runCount = 0
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            if runCount == 0 {
+                user.mainRequest.submit()
+            }
+            else if runCount == 1 {
+                user.mainRequest.deliver()
+            }
+            else if runCount == 2 {
+                timer.invalidate()
+            }
+            
+            runCount += 1
+            
+        }
+        
         return user.mainRequest.description()
+        
     }
 
 }

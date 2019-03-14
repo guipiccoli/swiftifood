@@ -14,4 +14,8 @@ struct Item  {
     var description: String
     var price : Double
     var type: String
+    
+    func toString() -> String {
+        return "\(self.name)\n\(description)\nPrice: R$\(self.price)\n\(self.type)"
+    }
 }
