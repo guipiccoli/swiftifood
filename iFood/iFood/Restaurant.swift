@@ -13,22 +13,26 @@ enum DeliveredLocation {
     case Partenon, BelaVista, JardimBotanico, Centro, CidadeBaixa, VilaLeopoldina, Azenha, Petropolis, BomFim
 }
 
-
+enum Category {
+    case Healthy, FastFood, HomeMade
+}
 
 class Restaurant: Hashable {
    
     var id: Int
     var name: String
     var items: Array<Item>
-    var deliveredLocations : [DeliveredLocation]
+    var deliveredLocations : Set<DeliveredLocation>
+    var categories: Set<Category>
     var hashValue: Int {
         return id.hashValue
     }
     
-    init(id: Int, name: String, deliveredLocations: [DeliveredLocation]) {
+    init(id: Int, name: String, deliveredLocations: Set<DeliveredLocation>, categories: Set<Category>) {
         self.id = id
         self.name = name
         self.deliveredLocations = deliveredLocations
+        self.categories = categories
         self.items = []
     }
     

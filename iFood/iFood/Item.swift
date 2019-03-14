@@ -9,7 +9,7 @@
 import Foundation
 
 struct Item: Equatable {
-    var nome: String
+    var name: String
     var description: String
     var price : Double
     var type: String
