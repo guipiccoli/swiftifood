@@ -97,4 +97,12 @@ struct Ifood {
         return self.restaurantsCategoryCluster[key] ?? Set<Restaurant>()
     }
     
+    func selectRestaurant(restaurant: Restaurant) -> [Item] {
+        return restaurant.listItems()
+    }
+//
+//    func moveToCart(user: User, item: Item) -> bool {
+//
+//    }
+//
 }

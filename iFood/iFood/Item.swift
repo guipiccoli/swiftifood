@@ -10,6 +10,7 @@ import Foundation
 
 struct Item: Equatable {
     var name: String
+    var restaurant: Restaurant
     var description: String
     var price : Double
     var type: String

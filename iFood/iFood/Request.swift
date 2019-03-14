@@ -16,18 +16,24 @@ enum State {
     case Paid, Deleted, OnTheWay, Delivered, Canceled, Cart, Submited
 }
 
-struct Request {
-    var items: [Item]
+class Request {
+    var status: State
+    var transition: Transition
+    var items = [String: (number: Int, item: Item)]()
     var totalPrice: Double {
-        let _items = self.items.map { (item) -> Double in
-            item.price
+        let _items = self.items.map { (arg) -> Double in
+            
+            let (_, tuple) = arg
+            return tuple.item.price * Double(tuple.number)
         }
         return _items.reduce(0) { $0 + $1 }
     }
-    var status: State
-    var transition: Transition
     
-    mutating func nextState(){
+    init(){
+        self.status = .Cart
+    }
+    
+    func nextState(){
         
         switch self.status {
         case .Cart:
@@ -57,29 +63,50 @@ struct Request {
         }
     }
     
-    mutating func pay() {
+    func pay() {
         self.transition = .Pay
         nextState()
     }
     
-    mutating func cancel() {
+    func cancel() {
         self.transition = .Cancel
         nextState()
     }
     
-    mutating func submit() {
+     func submit() {
         self.transition = .Submit
         nextState()
     }
     
-    mutating func deliver() {
+     func deliver() {
         self.transition = .Deliver
         nextState()
     }
     
-    mutating func delete() {
+    func delete() {
         self.transition = .Delete
         nextState()
+    }
+    
+    func addItem(item: Item) {
+        let itemReference = item.restaurant.name + item.name
+        if self.items.keys.contains(itemReference) {
+            self.items[itemReference]?.number += 1
+        }
+        else {
+           self.items[itemReference] = (1, item)
+        }
+    }
+    
+    func description() -> String {
+        var result: String
+        result = "State: \(self.status)\n"
+        self.items.forEach { (arg) in
+            
+            let (_, tuple) = arg
+            result += "\(tuple.number)x \(tuple.item.name)\n"
+        }
+        return result
     }
     
 }

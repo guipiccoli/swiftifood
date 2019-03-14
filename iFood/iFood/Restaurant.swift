@@ -36,6 +36,10 @@ class Restaurant: Hashable {
         self.items = []
     }
     
+    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
+        return lhs.id == rhs.id
+    }
+    
     func addItems(item: Item) -> Bool{
         if items.contains(item){
             return false
@@ -58,7 +62,8 @@ class Restaurant: Hashable {
         return false
     }
     
-    static func == (lhs: Restaurant, rhs: Restaurant) -> Bool {
-        return lhs.id == rhs.id
+    func listItems() -> [Item] {
+        return self.items
     }
+    
 }

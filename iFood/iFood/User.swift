@@ -9,14 +9,16 @@
 import Foundation
 
 
-class User: Codable {
+class User {
     
     var name: String
-    var pedidos: Int
+    var requests: [Request]
+    var mainRequest: Request
     
-    init(name: String, pedidos: Int){
+    init(name: String, request: [Request]) {
         self.name = name
-        self.pedidos = pedidos
+        self.requests = request
+        self.mainRequest = Request.init()
     }
     
 }
