@@ -13,10 +13,10 @@ enum Transition {
 }
 
 enum State {
-    case Paid, Deleted, OnTheWay, Delivered, Canceled, Cart, Submited
+    case Paid, OnTheWay, Delivered, Canceled, Cart, Submited
 }
 
-class Request {
+class Request: NSObject {
     var status: State
     var transition: Transition
     var items = [String: (number: Int, item: Item)]()
@@ -29,7 +29,7 @@ class Request {
         return _items.reduce(0) { $0 + $1 }
     }
     
-    init(){
+    override init(){
         self.status = .Cart
         self.transition = .Started
     }
@@ -40,9 +40,6 @@ class Request {
         case .Cart:
             if self.transition == .Pay {
                 self.status = .Paid
-            }
-            else if self.transition == .Delete {
-                self.status = .Deleted
             }
         case .Paid:
             if self.transition == .Submit {
@@ -81,11 +78,6 @@ class Request {
     
      func deliver() {
         self.transition = .Deliver
-        nextState()
-    }
-    
-    func delete() {
-        self.transition = .Delete
         nextState()
     }
     

@@ -133,6 +133,11 @@ struct Ifood {
             runCount += 1
             
         }
+    
+        
+        user.requests.append(user.mainRequest.copy() as! Request)
+        
+        user.mainRequest = Request.init()
         
         return user.mainRequest.description()
         
