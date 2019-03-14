@@ -15,6 +15,11 @@ struct Ifood {
     var restaurantsCluster = [String: Set<Restaurant>]()
     var restaurantsCategoryCluster = [Category: Set<Restaurant>]()
     
+    init() {
+        self.restaurantID = 0
+        self.restaurants = []
+    }
+    
     mutating func registerRestaurant(name: String, deliverLocations: [DeliveredLocation], categories: [Category]) -> Restaurant? {
         let restaurant = Restaurant(id: self.restaurantID, name: name, deliveredLocations: Set(deliverLocations), categories: Set(categories))
         
