@@ -8,24 +8,39 @@
 
 import Foundation
 
-//var rest = Restaurante(name: "Cachorro do Bigode", deliveredLocations: "A,B,C")
-//var itm = Item(nome: "Cachorro", description: "Completo", price: 12.89, type: "Lanche")
-//var itm2 = Item(nome: "Cachorro Linguica", description: "Completo", price: 15, type: "Lanche")
-//rest.addItems(item: itm)
-//rest.addItems(item: itm2)
-//
-//rest.removeItem(item: itm)
-//
-//print(rest.items)
-//print("Hello, World!")
-//
-//var obj1 = User(name: "Rogerio", pedidos: 4)
-//
-//UserDefaults.standard.set(try? PropertyListEncoder().encode(obj1), forKey:"songs")
-//
-//if let data = UserDefaults.standard.value(forKey:"songs") as? Data {
-//    let songs2 = try? PropertyListDecoder().decode(User.self, from: data)
-//    print(songs2!.name)
+var ifood = Ifood.init()
+var user = User.init(name: "Paulinho", request: [])
+
+
+var gelson = ifood.registerRestaurant(name: "Xis do Gelson", deliverLocations: [DeliveredLocation.Azenha, DeliveredLocation.BelaVista, DeliveredLocation.Partenon, DeliveredLocation.JardimBotanico], categories: [Category.FastFood, Category.HomeMade])
+var madero = ifood.registerRestaurant(name: "Madero Burguer", deliverLocations: [DeliveredLocation.Azenha, DeliveredLocation.Centro, DeliveredLocation.Partenon, DeliveredLocation.CidadeBaixa], categories: [Category.FastFood])
+var cookieFoca = ifood.registerRestaurant(name: "Cookie do Foca", deliverLocations: [DeliveredLocation.Petropolis, DeliveredLocation.BelaVista, DeliveredLocation.Partenon, DeliveredLocation.CidadeBaixa], categories: [Category.HomeMade])
+var saudeNoCopo = ifood.registerRestaurant(name: "Saude no Copo", deliverLocations: [DeliveredLocation.Azenha, DeliveredLocation.BelaVista, DeliveredLocation.Partenon, DeliveredLocation.JardimBotanico, DeliveredLocation.CidadeBaixa, DeliveredLocation.Centro], categories: [Category.Healthy])
+
+let xstrogo = ifood.createItem(restaurant: gelson!, name: "Xis Strogonoff", description: "Pao, ervilha, queijo, milho, maionese, strogonoff, ovo", price: 60.0, type: "Lanche")
+let xcarne = ifood.createItem(restaurant: gelson!, name: "Xis Carne", description: "Pao, ervilha, queijo, milho, maionese, bife de gado, ovo", price: 55.0, type: "Lanche")
+
+//print(gelson!.name, "\n")
+//gelson!.listItems().forEach { (item) in
+//    print(item.toString(), "\n")
 //}
+//
+//ifood.restaurants.enumerated().forEach({ (i, rest) in
+//    print(i, "-", rest.name)
+//})
+
+var _ = ifood.moveToCart(user: user, item: xstrogo!)
+var _ = ifood.moveToCart(user: user, item: xcarne!)
+var _ = ifood.moveToCart(user: user, item: xcarne!)
+
+print(user.mainRequest.description())
+
+
+//print(ifood.finishOrder(user: user))
+//while(true){
+//    print(user.mainRequest.description())
 //}
+
+
+
 
