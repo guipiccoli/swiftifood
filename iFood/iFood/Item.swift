@@ -16,6 +16,6 @@ struct Item  {
     var type: String
     
     func toString() -> String {
-        return "\(self.name)\n\(description)\nPrice: R$\(self.price)\n\(self.type)"
+        return "\(self.name)\nDescription: \(description)\nPrice: R$\(self.price)\n\(self.type)"
     }
 }
