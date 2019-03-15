@@ -68,11 +68,9 @@ var _ = ifood.moveToCart(user: user, item: itemOption)
 
 print("\n\(user.mainRequest.description())")
 
-//print(ifood.finishOrder(user: user))
-//while(true){
-//    print(user.mainRequest.description())
-//}
+ifood.finishOrder(user: user)
 
+print(user.mainRequest.description())
 
 
 

@@ -117,30 +117,25 @@ struct Ifood {
     
     func finishOrder(user: User) -> String {
         user.mainRequest.pay()
-        var runCount = 0
-        
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            if runCount == 0 {
-                user.mainRequest.submit()
-            }
-            else if runCount == 1 {
-                user.mainRequest.deliver()
-            }
-            else if runCount == 2 {
-                timer.invalidate()
-            }
-            
-            runCount += 1
-            
-        }
-    
-        
-        user.requests.append(user.mainRequest.copy() as! Request)
-        
-        user.mainRequest = Request.init()
         
         return user.mainRequest.description()
         
+    }
+    
+    func submitRequest(user: User) {
+        user.mainRequest.submit()
+    }
+    
+    func cancelRequest(user: User) {
+        user.mainRequest.cancel()
+    }
+    
+    func deliverRequest(user: User) {
+        user.mainRequest.deliver()
+        
+        user.requests.append(user.mainRequest)
+        
+        user.mainRequest = Request.init()
     }
 
 }
