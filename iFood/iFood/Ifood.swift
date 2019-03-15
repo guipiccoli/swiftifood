@@ -130,12 +130,16 @@ struct Ifood {
         user.mainRequest.cancel()
     }
     
-    func deliverRequest(user: User) {
+    func deliverRequest(user: User) -> Request {
         user.mainRequest.deliver()
         
-        user.requests.append(user.mainRequest)
+        var request = user.mainRequest
+        
+        user.requests.append(request)
         
         user.mainRequest = Request.init()
+        
+        return request
     }
 
 }
